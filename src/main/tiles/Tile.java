@@ -1,5 +1,7 @@
 package main.tiles;
 
+import main.graphics.GameMap;
+
 public class Tile implements Cloneable {
     public int timeSparked;
     public int c;
@@ -10,14 +12,15 @@ public class Tile implements Cloneable {
     public String id;
     public boolean isSparked = false;
     public boolean alreadysparked;
+    public boolean loud = true;
 
     public Tile(int c, String id) {
         this.c = c;
         this.id = id;
     }
 
-    public void tempCheck(int x, int y, Tile[][] map) {
-        map[x][y]=map[x][y];
+    public void tempCheck(int x, int y, GameMap gameMap) {
+        gameMap.getMap()[x][y]=gameMap.getMap()[x][y];
     }
 
     public void update(Tile[][] map, int x, int y) {

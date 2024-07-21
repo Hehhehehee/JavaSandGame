@@ -1,8 +1,9 @@
 package main.graphics;
 
+import api.materials.MaterialService;
 import main.Main;
 import main.tiles.Tile;
-import main.tiles.elements.loader;
+import api.elements.loader;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Objects;
 public class GameMap {
     private Tile[][] map;
     public Main m;
+    public MaterialService ms = new MaterialService(this);
     public final ArrayList<Tile> elements = new ArrayList<>();
 
     private int MAP_WIDTH;
@@ -28,7 +30,33 @@ public class GameMap {
         MAP_HEIGHT = height;
         map = new Tile[MAP_WIDTH][MAP_HEIGHT];
     }
+    public void castLight(int startX, int startY, Graphics g, int raySpacing, int lightRadius, int color) {
+        for (int i = 0; i < 360; i += raySpacing) {
+            float angle = (float) Math.toRadians(i);
+            int endX = (int) (startX + Math.cos(angle) * lightRadius);
+            int endY = (int) (startY + Math.sin(angle) * lightRadius);
 
+            int dx = endX - startX;
+            int dy = endY - startY;
+
+            int distance = (int) Math.sqrt(dx * dx + dy * dy);
+            for (int j = 0; j <= distance; j++) {
+                float fraction = (float) j / distance;
+                int x = startX + (int) (dx * fraction);
+                int y = startY + (int) (dy * fraction);
+
+                if (x < 0 || x >= MAP_WIDTH || y < 0 || y >= MAP_HEIGHT) {
+                    break;
+                }
+
+                if (map[x][y] != null) {
+                    break;
+                }
+                g.setColor(new Color(color,true));
+                g.fillRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+            }
+        }
+    }
     public void render(Graphics g) {
         g.clearRect(0, 0, MAP_WIDTH * BLOCK_SIZE, MAP_HEIGHT * BLOCK_SIZE);
         for (int y = 0; y < MAP_HEIGHT; y++) {
@@ -40,6 +68,7 @@ public class GameMap {
                 }
             }
         }
+
     }
 
     public void update() {
@@ -60,7 +89,7 @@ public class GameMap {
                 if (map[i][j] != null) {
                     if (!map[i][j].alreadyupdated) {
                         map[i][j].alreadyupdated = true;
-                        map[i][j].temp += (273F - map[i][j].temp) * 0.01f;
+                        map[i][j].temp += (273F - map[i][j].temp) * 0.001f;
                         for (int dx = -1; dx <= 1; dx++) {
                             for (int dy = -1; dy <= 1; dy++) {
                                 int nx = i + dx;
@@ -80,7 +109,7 @@ public class GameMap {
                             }
                         }
                         if (map[i][j] != null) {
-                            map[i][j].tempCheck(i, j, map);
+                            map[i][j].tempCheck(i, j, this);
                         }
                         map[i][j].update(map, i, j);
                     }

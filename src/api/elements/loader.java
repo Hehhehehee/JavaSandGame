@@ -1,5 +1,4 @@
-package main.tiles.elements;
-import main.tiles.elements.recipes.*;
+package api.elements;
 import main.graphics.GameMap;
 
 public class loader {

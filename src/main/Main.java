@@ -14,7 +14,7 @@ public class Main {
         c = new Choice();
         c.setBounds(5, 5, 190, 190);
         for (int i = 0; i < gw.getGameMap().elements.toArray().length; i++) {
-            c.addItem(gw.getGameMap().elements.get(i).id);
+            if (gw.getGameMap().elements.get(i).loud) c.addItem(gw.getGameMap().elements.get(i).id);
         }
         f.add(c);
         f.setSize(200, 600);

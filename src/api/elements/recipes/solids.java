@@ -1,4 +1,4 @@
-package main.tiles.elements.recipes;
+package api.elements.recipes;
 
 import main.recipes.recipe;
 import main.tiles.controller.gameController;

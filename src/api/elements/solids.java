@@ -1,4 +1,4 @@
-package main.tiles.elements;
+package api.elements;
 
 import main.graphics.GameMap;
 import main.tiles.Tile;

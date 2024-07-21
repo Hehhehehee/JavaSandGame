@@ -1,9 +1,6 @@
-package main.tiles.elements.recipes;
+package api.elements.recipes;
 
 import main.tiles.controller.gameController;
-import main.tiles.elements.recipes.liquids;
-import main.tiles.elements.recipes.powders;
-import main.tiles.elements.recipes.solids;
 
 public class recipesloader {
     public recipesloader(gameController gm) {
