@@ -1,3 +1,11 @@
+> [!IMPORTANT]  
+> The current README is 1-3 commits behind, see below for reasoning
+<details>
+  <summary>reasoning</summary>
+  
+  commit [76252b0](https://github.com/Hehhehehee/JavaSandGame/commit/76252b0fc465cc7bbd178778f06e3edfa765a6a2) made the lastest release and this README outdated, i dont have time for fixing this as of now, but a fix will come some day
+  </details>
+  
 # readme
 so, this is a simple java sand game, my first java project too i guess so maybe probably
 ## developing
